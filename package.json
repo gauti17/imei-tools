@@ -1,0 +1,69 @@
+{
+  "name": "imei-tools",
+  "version": "1.0.0",
+  "description": "Validate, analyze and generate IMEI, IMEISV, MEID / pESN and ICCID numbers. Zero dependencies, TypeScript, ESM + CJS, Node and browsers. Same algorithms as imeilens.com.",
+  "keywords": [
+    "imei",
+    "imei-validator",
+    "imei-generator",
+    "imei-checker",
+    "imeisv",
+    "tac",
+    "luhn",
+    "meid",
+    "esn",
+    "pesn",
+    "iccid",
+    "sim",
+    "mobile",
+    "telecom",
+    "gsma",
+    "test-data"
+  ],
+  "homepage": "https://imeilens.com/en/developers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gauti17/imei-tools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gauti17/imei-tools/issues"
+  },
+  "author": "IMEILens (https://imeilens.com)",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && node scripts/write-cjs-package.cjs",
+    "typecheck": "tsc -p tsconfig.esm.json --noEmit",
+    "test": "npm run build && node --test",
+    "prepublishOnly": "npm test"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
